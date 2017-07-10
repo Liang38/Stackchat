@@ -3,7 +3,7 @@ import Message from './Message';
 import NewMessageEntry from './NewMessageEntry';
 import axios from 'axios';
 import store from '../Store';
-import {gotMessagesFromServer} from '../Store';
+import { gotMessagesFromServer } from '../Store';
 
 export default class MessagesList extends Component {
 
@@ -34,12 +34,14 @@ export default class MessagesList extends Component {
     const messages = this.state.messages;
     const filteredMessages = messages.filter(message => message.channelId === channelId);
 
+    console.log("channelId", channelId)
+
     return (
       <div>
         <ul className="media-list">
-          { filteredMessages.map(message => <Message message={message} key={message.id} />) }
+          {filteredMessages.map(message => <Message message={message} key={message.id} />)}
         </ul>
-        <NewMessageEntry />
+        <NewMessageEntry channelId={channelId} />
       </div>
     );
   }

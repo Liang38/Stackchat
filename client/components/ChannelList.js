@@ -30,7 +30,7 @@ export default class ChannelList extends Component {
 
   render() {
     const messages = this.state.messages;
-
+    console.log(this.state)
     function channelCount(id) {
       return messages.filter((message) => message.channelId === id).length;
     }
