@@ -3,7 +3,7 @@ import Message from './Message';
 import NewMessageEntry from './NewMessageEntry';
 import axios from 'axios';
 import store from '../Store';
-import gotMessagesFromServer from '../Store';
+import {gotMessagesFromServer} from '../Store';
 
 export default class MessagesList extends Component {
 
@@ -15,13 +15,16 @@ export default class MessagesList extends Component {
   componentDidMount() {
     axios.get('/api/messages')
       .then(res => res.data)
-      .then(messages => store.dispatch(gotMessagesFromServer(messages)));
+      .then(messages => {
+        const action = gotMessagesFromServer(messages);
+        store.dispatch(action);
+      });
 
     this.unsubscribe = store.subscribe(() =>
       this.setState(store.getState()))
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.unsubscribe();
   }
 
